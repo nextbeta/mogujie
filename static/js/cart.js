@@ -49,8 +49,22 @@ $(document).ready(function(){
 		$(".empty_cart").hide()
 	})
 	//初始化隐藏
-	$(".cartEmpty").hide();
-	// //获取cookie
+
+	if ($('.show_login a').html().indexOf("未登录")>=0){
+		$(".cartEmpty").show();
+	}else{
+		$(".cartEmpty").hide();
+	}
+	$('#od_delete').click(function () {
+		var cartid = $(this).attr('cartid')
+		$.get('/mgj/delorder/',{'cartid':cartid},function (response){
+			console.log("response")
+            if (response.status == 1){
+				window.location.reload()
+			}
+        })
+    })
+	//获取cookie
 	// var goodsList = $.cookie("cart");
 	// if(goodsList){
 	// 	goodsList = JSON.parse(goodsList);

@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^checkemail/$', views.checkemail, name='checkemail'),
     url(r'^shopping/$', views.shopping, name='shopping'),
     url(r'^productDetail/(?P<title>\d+)$', views.productDetail, name='productDetail'),
-
+    url(r'^delorder/$', views.delorder, name='delorder'),
 ]

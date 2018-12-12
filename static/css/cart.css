@@ -272,11 +272,17 @@ a{
 	border-spacing: 0;
 	color: #999;
 }
+.cartlist .tablegood{width: 100px}
+.cartlist .goodsinfo{width: 553px}
+.cartlist *{text-align: center}
 .cartlist .price_{
 	width: 80px;
 }
 .cartlist .select{
-	width: 80px;
+	width: 10px;
+}
+.cartlist th{
+	text-align: center;
 }
 .data-con .propic{
 	display: inline-block;
@@ -341,3 +347,17 @@ a{
 	width:50px;
 	background: url(../img/cartfooter.png) -486px -50px no-repeat;
 }
+
+.pagination {width: 100%;display: block;float: left;margin-bottom: 0px}
+.pagination li{height: 100px;display: block;float: left;vertical-align: middle;text-align: center;}
+.pagination .smallImg{width: 100px}
+.pagination .smallImg img{width: 100%}
+.pagination .od_name{width: 553px}
+.pagination .od_price{width: 80px}
+.pagination .od_number{width: 117px}
+.pagination .od_summ{width: 219px;}
+.pagination .od_delete{width: 118px}
+.pagination .od_delete a{ margin-left: 30px}
+
+
+.pagination .select_{width: 20px;margin-left: 30px;}

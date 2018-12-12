@@ -215,12 +215,11 @@ $(document).ready(function () {
     $('.buynow').click(function () {
         if (data['size']){
             if (data['smallimg']){
-                console.log(data)
                 $.post('/mgj/shopping/', data, function (response) {
                         console.log("111")
                         console.log(response)
-                        if (response.status == 1){
-                            window.open('/mgj/shopping/')
+                        if (response.status){
+                            window.open('/shopping/')
                         }
                     }
                 )

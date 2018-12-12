@@ -104,15 +104,24 @@ def checkemail(request):
 
 @csrf_exempt
 def shopping(request):
+    data = {}
     if request.method == 'GET':
-        return render(request, 'shopping.html')
+        token = request.session.get('token')
+        if token:
+            user = User.objects.get(token=token)
+            cart = Cart.objects.filter(user=user)
+            data['user_name']= user.name
+            data['cart'] = cart
+            return render(request, 'shopping.html', context=data)
+        else:
+            return render(request, 'shopping.html')
+
     elif request.method == 'POST':
         token = request.session.get('token')
         user = User.objects.get(token=token)
 
         name = request.POST.get('name')
         number = request.POST.get('number')
-        print(number)
         price = request.POST.get('price')
         size = request.POST.get('size')
         smallimg = request.POST.get('smallimg')
@@ -120,7 +129,6 @@ def shopping(request):
         carts = Cart.objects.filter(user=user).filter(name = name).filter(smallimg = smallimg)
         if carts.filter(size=size).exists():
             cart = carts.first()
-            print(cart)
             cart.number += eval(number)
             cart.save()
         else:
@@ -152,3 +160,15 @@ def productDetail(request, title):
         'sales': good.sales
     }
     return render(request, 'productDetail.html',context=data)
+
+
+def delorder(request):
+    cartid = request.GET.get('cartid')
+    cart = Cart.objects.get(pk=cartid)
+    cart.delete()
+    data = {
+        'msg': '购物车删减成功',
+        'status': 1
+    }
+    print(data)
+    return JsonResponse(data)
