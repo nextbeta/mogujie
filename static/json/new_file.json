@@ -1,0 +1,46 @@
+[
+	{
+		"id":"1",
+		"img":"img/youxuan1.jpg",
+		"title":"蘑菇优选",
+		"decription":"优质生活 值得更好"
+	},
+	{
+		"id":"2",
+		"img":"img/youxuan2.jpg",
+		"title":"品质精选",
+		"description":"9月暖心好物推荐"
+	},
+	{
+		"id":"3",
+		"img":"img/youxuan3.jpg",
+		"title":"品质热卖",
+		"description":"亲肤毛巾 超强吸水"
+	},
+	{
+		"id":"4",
+		"img":"img/youxuan4.jpg",
+		"title":"人气新款",
+		"description":"进口卫生巾 柔软敏感"
+	},
+	{
+	 	"id":"5",
+		"img":"img/youxuan5.jpg",
+		"title":"皇室御用浴盐"
+	},
+	{
+	 	"id":"6",
+		"img":"img/youxuan7.jpg",
+		"title":"日本内野制造"
+	},
+	{
+	 	"id":"7",
+		"img":"img/youxuan6.jpg",
+		"title":"袜子精选"
+	},
+	{
+	 	"id":"8",
+		"img":"img/youxuan8.jpg",
+		"title":"进口日化"
+	}
+]

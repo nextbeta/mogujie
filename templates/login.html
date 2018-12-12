@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/login.js"></script>
+</head>
+<body>
+<!--头部-->
+<div class="homepage">
+    <div class="header">
+        <a href="{% url 'mgj:index' %}"><img src="/static/img/logo_mo.jpg" alt=""/></a>
+    </div>
+    <div class="login">
+        <form action="{% url 'mgj:login' %}" method="post" id="login-view">
+            {% csrf_token %}
+            {# 邮箱#}
+            <div class="form-group has-feedback" id="email">
+                <input type="text" class="form-control" aria-describedby="inputSuccess2Status" placeholder="邮箱"
+                       name="email">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <p>
+                    {{ u_err }}
+                </p>
+            </div>
+
+            {# 密码#}
+            <div class="form-group has-feedback" id="password">
+                <input type="password" class="form-control" aria-describedby="inputSuccess2Status" placeholder="密码"
+                       name="password">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <p>
+                    {{ p_err }}
+                </p>
+            </div>
+
+            <input type="submit" value="登录" id="subButton" disabled="disabled">
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

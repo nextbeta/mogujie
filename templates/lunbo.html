@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lunbo</title>
+    <link rel="stylesheet" href='/static/css/swiper.min.css'>
+
+</head>
+<body>
+<script src="/static/js/jquery-1.12.3.js"></script>
+<script src='/static/js/swiper.min.js'></script>
+
+<script type="text/javascript">
+    $(function () {
+        var topSwiper = new Swiper('#topSwiper', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            paginationClickable: true,
+            spaceBetween: 30,
+            loop: true,
+            autoplay : 2000,
+        });
+    })
+</script>
+
+<div class="swiper-container" id="topSwiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="/static/img/lb1.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="/static/img/lb2.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="/static/img/lb3.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="/static/img/lb4.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="/static/img/lb5.jpg">
+        </div>
+    </div>
+    <!-- 分页器 -->
+    <div class="swiper-pagination"></div>
+    <!-- 导航 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
+
+</body>
+</html>

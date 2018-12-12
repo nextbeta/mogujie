@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/css/reset.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/registe.css"/>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/registera.js"></script>
+</head>
+<body>
+<div class="homepage">
+    <div class="header">
+        <a href="{% url 'mgj:index' %}"><img src="/static/img/logo_mo.jpg"/></a>
+    </div>
+    <br/>
+
+    <div class="register">
+                <form action="{% url 'mgj:register' %}" method="post" id="register-view">
+            {% csrf_token %}
+{#            邮箱#}
+            <div class="form-group has-feedback" id="email">
+                <input type="text" class="form-control" aria-describedby="inputSuccess2Status" placeholder="邮箱" name="email">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <p class="text"></p>
+            </div>
+
+{#             密码#}
+            <div class="form-group has-feedback" id="password">
+                <input type="password" class="form-control" aria-describedby="inputSuccess2Status" placeholder="密码" name="password">
+                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                <p class="help">
+                    格式：长度为6~12，且只能为数字、字母、下划线
+                </p>
+            </div>
+
+{#            密码第二次#}
+            <div class="form-group has-feedback" id="password-d">
+                <input type="password" class="form-control" aria-describedby="inputSuccess2Status" placeholder="密码">
+                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                <p class="help">
+                    格式：两次密码输入要保持一致!
+                </p>
+            </div>
+
+
+{#            名字#}
+            <div class="form-group has-feedback" id="name">
+                <input type="text" class="form-control" aria-describedby="inputSuccess2Status" placeholder="名字(3~12)" name="name">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            </div>
+{#            <input type="submit" value="注册">#}
+            <button type="button" class="btn btn-primary" id="subButton"> 注册 </button>
+
+            {% comment %}
+            <div class="form-group has-error has-feedback">
+                <input type="text" class="form-control" id="email" aria-describedby="inputSuccess2Status" placeholder="邮箱">
+                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+            </div>
+            {% endcomment %}
+        </form>
+    </div>
+</div>
+</body>
+</html>
