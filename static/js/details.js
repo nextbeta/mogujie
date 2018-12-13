@@ -190,7 +190,6 @@ $(document).ready(function () {
         $(this).parent().css({borderColor: "red"}).siblings().css({borderColor: "#cfcfcf"});
         smallimg = $(this).attr("src")
         data['smallimg'] = smallimg
-        console.log(smallimg)
     })
     var size;
     $(".each-size li").css({background: "#cfcfcf"})
@@ -198,7 +197,6 @@ $(document).ready(function () {
         $(this).css({background: "url(/static/detailsImg/gouxuan.png) 100% 100% no-repeat"}).siblings().css({background: "#cfcfcf"});
         size = ($(this).html())
         data['size'] = size
-        console.log(data.size)
     })
     var bigimg_;
     $('.small-img img').mouseover(function () {
@@ -216,7 +214,6 @@ $(document).ready(function () {
         if (data['size']){
             if (data['smallimg']){
                 $.post('/mgj/shopping/', data, function (response) {
-                        console.log("111")
                         console.log(response)
                         if (response.status){
                             window.open('/shopping/')

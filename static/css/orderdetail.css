@@ -68,7 +68,7 @@ a{
 	z-index: 999;
 }
 .empty_cart tr{
-	
+
 }
 .empty_cart img{
 	width:80px;
@@ -163,7 +163,7 @@ a{
 	height: 23px;
 	position: absolute;
 	top: 18px;
-	left: 0;
+	left: 156px;
 }
 .steps{
 	position: absolute;
@@ -237,7 +237,7 @@ a{
 .cartEmpty{
 	wdith:1200px;
 	height: 226px;
-} 
+}
 .cartEmpty .cart_logo{
 	position: absolute;
 	left: 50%;
@@ -348,18 +348,19 @@ a{
 	background: url(../img/cartfooter.png) -486px -50px no-repeat;
 }
 
-.pagination {width: 100%;display: block;float: left;margin-bottom: 0px}
+.pagination {width: 100%;display: block;float: left;margin-bottom: 0px;margin-left: 35px}
 .pagination li{height: 100px;display: block;float: left;vertical-align: middle;text-align: center;}
 .pagination .smallImg{width: 100px}
 .pagination .smallImg img{width: 100%}
 .pagination .od_name{width: 553px}
 .pagination .od_price{width: 80px}
-.pagination .od_number{width: 117px}
-.pagination .od_summ{width: 219px;}
+.pagination .od_number{width: 163px}
+.pagination .od_summ{width: 304px;}
 .pagination .od_delete{width: 118px}
 .pagination .od_delete a{ margin-left: 30px}
 
-.last {display: block; float: right;margin-left: 1150px;width: 800px;}
-.last span {width: 100px;margin: 0px;padding: 0px;}
-
-.pagination .select_{width: 20px;margin-left: 30px;}
+.last {display: block; float: right;margin-left: 700px;width: 800px;}
+.last span {width: 100px;margin: 0px;padding: 0px}
+.last .sum {margin: 0px;background: white;color: black;border: none;width: 150px}
+.last #_odnum {width: 70px;margin: 0px;padding: 0px;background: white;color: black;border: none;padding-top: 6px}
+.last .od_id {width: 180px;margin: 0px;padding: 0px;background: white;color: black;border: none;padding-top: 6px}
