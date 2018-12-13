@@ -73,22 +73,9 @@ def register(request):
         user.save()
         request.session['token'] = user.token
 
-        return redirect('mgj:mine')
+        return redirect('mgj:index')
 
-def mine(request):
-    # 获取用户信息
-    token = request.session.get('token')
-    mgj_goods = productdetail.objects.all()
 
-    data = {}
-
-    if token:
-        user = User.objects.get(token=token)
-        data['name'] = user.name
-        data['icon'] = user.icon
-        data['mgj_goods'] = mgj_goods
-
-    return render(request, 'mainPage.html', context=data)
 
 
 def checkemail(request):
@@ -148,26 +135,29 @@ def shopping(request):
 
 def productDetail(request, title):
     token = request.session.get('token')
-    user = User.objects.get(token=token)
-    goods = productdetail.objects.filter(title=title)
-    cart = Cart.objects.filter(user=user).filter(is_delete=0)
-    cart_num = cart.count()
-    good = goods.first()
-    data = {
-        'name': good.name,
-        'img' : good.img,
-        'smallImg1': good.smallImg1,
-        'smallImg2': good.smallImg2,
-        'smallImg3': good.smallImg3,
-        'smallImg4': good.smallImg4,
-        'oldprice' : good.oldprice,
-        'price': good.price,
-        'store': good.store,
-        'sales': good.sales,
-        'user_name': user.name,
-        'cart_num': cart_num
-    }
-    return render(request, 'productDetail.html',context=data)
+    if token:
+        user = User.objects.get(token=token)
+        goods = productdetail.objects.filter(title=title)
+        cart = Cart.objects.filter(user=user).filter(is_delete=0)
+        cart_num = cart.count()
+        good = goods.first()
+        data = {
+            'name': good.name,
+            'img' : good.img,
+            'smallImg1': good.smallImg1,
+            'smallImg2': good.smallImg2,
+            'smallImg3': good.smallImg3,
+            'smallImg4': good.smallImg4,
+            'oldprice' : good.oldprice,
+            'price': good.price,
+            'store': good.store,
+            'sales': good.sales,
+            'user_name': user.name,
+            'cart_num': cart_num
+        }
+        return render(request, 'productDetail.html',context=data)
+    else:
+        return render(request, 'login.html')
 
 
 def delorder(request):
@@ -222,15 +212,22 @@ def generateorder(request):
 
 def orderdetail(request,identifier):
     # 找到对应的订单信息
+    print(type(identifier))
     token = request.session.get('token')
     user = User.objects.get(token=token)
     cart = Cart.objects.filter(user=user).filter(is_delete=0)
     cart_num = cart.count()
-    orders= Order.objects.filter(identifier=identifier)
-    if orders.count == 1:
-        return render(request, 'orderdetail.html', context={'orders': orders,'identifier':identifier,'cart_num':cart_num})
+    if identifier == "0":
+        orders = Order.objects.filter(user=user.pk)
     else:
-        return render(request, 'orderdetail.html', context={'orders': orders,'identifier':identifier,'cart_num':cart_num})
+        orders= Order.objects.filter(identifier=identifier)
+    data = {
+        'orders': orders,
+        'identifier': identifier,
+        'cart_num': cart_num,
+        'user_name':user.name
+    }
+    return render(request, 'orderdetail.html', context=data)
 
 def orderlist(request):
     return None

@@ -23,7 +23,7 @@
             </li>
             <li class="myorder">
                 <img src="/static/img/top_nav2.jpg" alt=""/>
-                <a href="#">我的订单&nbsp;|</a>
+                <a href="/orderdetail/0/">我的订单&nbsp;|</a>
             </li>
             <li class="shoppingcar">
                 <img src="/static/img/top_car.jpg" alt="" style="width:14px; height: 14px;"/>
@@ -132,7 +132,7 @@
         </li>
         <li class="od_delete">
             <span id="od_delete" cartid="{{orders.id}}">删除</span>
-            <span id="addorder">下单</span>
+            <span class="addorder" cart_id="{{orders.id}}">下单</span>
         </li>
     </ul>
     {% endfor %}

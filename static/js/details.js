@@ -220,9 +220,9 @@ $(document).ready(function () {
                         }
                     }
                 )
-            } else {console.log("请选择商品款式")}
+            } else {alert("请选择商品款式")}
         }else{
-            console.log("请选择商品尺码")
+            alert("请选择商品尺码")
         }
     })
 

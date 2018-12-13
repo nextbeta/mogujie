@@ -59,7 +59,17 @@ $(document).ready(function () {
         $(".cartEmpty").hide()
     }
 
-
+    $(".checkall").click(function () {
+        if (this.checked) {
+            for (var i = 0; i < $('.checkall_').length; i++) {
+                $(".checkall_").eq(i).prop("checked", true)
+            }
+        } else {
+            for (var i = 0; i < $('.checkall_').length; i++) {
+                $(".checkall_").eq(i).prop("checked", false);
+            }
+        }
+    });
 
     $('#od_delete').click(function () {
         var cartid = $(this).attr('cartid')
@@ -70,21 +80,39 @@ $(document).ready(function () {
             }
         })
     })
-    $('#addorder').click(function () {
+
+    for (var i=0;i < ($('.addorder').length);i++){
+        var cartid = $('.addorder').eq(i).attr("cart_id")
+        console.log(cartid)
+        $('.addorder').eq(i).click(function () {
+            $.get('/mgj/generateorder/', {'cartid':cartid}, function (response) {
+                // 订单详情
+                if (response.status == 1) {
+                    window.open('/mgj/orderdetail/' + response.identifier + '/', target = '_self')
+                    console.log(response)
+                }
+            })
+        })
+    }
+
+    $('.addod_all').click(function () {
         data = {}
         for (var i=0; i<$('.checkall_').length; i++){
             if ($('.checkall_')[i].checked){
                 data['cartid'+ i] = $('.checkall_').eq(i).attr('cartid')
             }
         }
-        $.get('/mgj/generateorder/', data, function (response) {
-            // 订单详情
-            if (response.status == 1) {
-                window.location.reload()
-                window.open('/mgj/orderdetail/' + response.identifier + '/', target='_self')
-                console.log(response)
-            }
-        })
+        if (!$.isEmptyObject(data)){
+            $.get('/mgj/generateorder/', data, function (response) {
+                // 订单详情
+                if (response.status == 1) {
+                    window.location.reload()
+                    window.open('/mgj/orderdetail/' + response.identifier + '/', target = '_self')
+                    console.log(response)
+                }
+            })
+        }
+
     })
     //获取cookie
     // var goodsList = $.cookie("cart");

@@ -23,7 +23,7 @@
             </li>
             <li class="myorder">
                 <img src="/static/img/top_nav2.jpg" alt=""/>
-                <a href="#">我的订单&nbsp;|</a>
+                <a href="/orderdetail/0/">我的订单&nbsp;|</a>
             </li>
             <li class="shoppingcar">
                 <img src="/static/img/top_car.jpg" alt="" style="width:14px; height: 14px;"/>
@@ -123,7 +123,8 @@
                     for (var i=0; i < $('.od_summ').length; i++){
                         sum_ += eval($('.od_summ')[i].outerText)
                     }
-                    document.write("<b>" + sum_ + "</b>")
+                    var sum_re = sum_.toFixed(2)
+                    document.write("<b>" + sum_re + "</b>")
                 </script>
                 (元)
             </span>
