@@ -39,7 +39,7 @@ def login(request):
                 user.token = generate_token()
                 user.save()
                 request.session['token'] = user.token
-                return redirect('mgj:mine')
+                return redirect('mgj:index')
             else:
                 return render(request, 'login.html', context={'p_err': '密码错误'})
         except:
@@ -104,60 +104,62 @@ def shopping(request):
         else:
             return render(request, 'shopping.html')
 
-    elif request.method == 'POST':
+    else:
         token = request.session.get('token')
-        user = User.objects.get(token=token)
+        if token:
+            user = User.objects.get(token=token)
 
-        name = request.POST.get('name')
-        number = request.POST.get('number')
-        price = request.POST.get('price')
-        size = request.POST.get('size')
-        smallimg = request.POST.get('smallimg')
+            name = request.POST.get('name')
+            number = request.POST.get('number')
+            price = request.POST.get('price')
+            size = request.POST.get('size')
+            smallimg = request.POST.get('smallimg')
 
-        carts = Cart.objects.filter(user=user).filter(name = name).filter(smallimg = smallimg)
-        if carts.filter(size=size).filter(is_delete=0).exists():
-            cart = carts.first()
-            cart.number += eval(number)
-            cart.save()
+            carts = Cart.objects.filter(user=user).filter(name = name).filter(smallimg = smallimg)
+            if carts.filter(size=size).filter(is_delete=0).exists():
+                cart = carts.first()
+                cart.number += eval(number)
+                cart.save()
+            else:
+                cart = Cart()
+                cart.user = user
+                cart.name = name
+                cart.price = price
+                cart.size = size
+                cart.smallimg = smallimg
+                cart.number = number
+                cart.is_delete = 0
+                cart.save()
+            # 1、 第一次添加的商品是不存在的，要往数据库中添加一条新记录
+            return JsonResponse({'msg': '{},添加购物车成功'.format(name), 'number': cart.number, 'status': 1})
         else:
-            cart = Cart()
-            cart.user = user
-            cart.name = name
-            cart.price = price
-            cart.size = size
-            cart.smallimg = smallimg
-            cart.number = number
-            cart.is_delete = 0
-            cart.save()
-        # 1、 第一次添加的商品是不存在的，要往数据库中添加一条新记录
-        return JsonResponse({'msg': '{},添加购物车成功'.format(name), 'number': cart.number, 'status': 1})
-
+            return JsonResponse({'msg': '添加购物车失败，请先登录', 'status': 0})
 
 def productDetail(request, title):
     token = request.session.get('token')
     if token:
         user = User.objects.get(token=token)
-        goods = productdetail.objects.filter(title=title)
         cart = Cart.objects.filter(user=user).filter(is_delete=0)
         cart_num = cart.count()
-        good = goods.first()
         data = {
-            'name': good.name,
-            'img' : good.img,
-            'smallImg1': good.smallImg1,
-            'smallImg2': good.smallImg2,
-            'smallImg3': good.smallImg3,
-            'smallImg4': good.smallImg4,
-            'oldprice' : good.oldprice,
-            'price': good.price,
-            'store': good.store,
-            'sales': good.sales,
             'user_name': user.name,
             'cart_num': cart_num
         }
-        return render(request, 'productDetail.html',context=data)
-    else:
-        return render(request, 'login.html')
+    goods = productdetail.objects.filter(title=title)
+    good = goods.first()
+    data = {
+        'name': good.name,
+        'img' : good.img,
+        'smallImg1': good.smallImg1,
+        'smallImg2': good.smallImg2,
+        'smallImg3': good.smallImg3,
+        'smallImg4': good.smallImg4,
+        'oldprice' : good.oldprice,
+        'price': good.price,
+        'store': good.store,
+        'sales': good.sales,
+    }
+    return render(request, 'productDetail.html',context=data)
 
 
 def delorder(request):

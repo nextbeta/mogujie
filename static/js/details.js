@@ -214,9 +214,12 @@ $(document).ready(function () {
         if (data['size']){
             if (data['smallimg']){
                 $.post('/mgj/shopping/', data, function (response) {
-                        console.log(response)
-                        if (response.status){
+
+                        if (response.status == 1){
                             window.open('/shopping/')
+                        }
+                        if (response.status == 0){
+                            window.open('/login/')
                         }
                     }
                 )
